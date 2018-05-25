@@ -1,0 +1,6 @@
+name: Rundeck
+description: Rundeck console
+version: v1.0
+category: DevOps
+license:
+projectURL: https://github.com/rundeck/rundeck

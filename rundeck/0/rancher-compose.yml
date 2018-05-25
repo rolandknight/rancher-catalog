@@ -1,0 +1,18 @@
+version: '2'
+catalog:
+  name: rundeck
+  version: v1.0
+  description: Rundeck console
+  minimum_rancher_version: v0.59.0
+  questions:
+    - variable: "FQDN"
+      label: "FQDN"
+      description: |
+        Domain name to expose on Traefik.
+      default: "rundeck.internal.ionpig.com"
+      required: true
+      type: "string"
+services:
+  rundeck:
+    start_on_create: true
+    retain_ip: true

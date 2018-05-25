@@ -1,0 +1,19 @@
+version: '2'
+
+catalog:
+  name: "plantuml"
+  version: "1.0.0"
+  description: "PlantUML server."
+  minimum_rancher_version: v1.5.0
+  # maximum_rancher_version:
+  # upgrade_from: # The previous versions that this template can be upgraded from
+  questions:
+    - variable: "PORT"
+      label: "Port:"
+      description: "Server listen port"
+      required: true
+      default: 8100
+      type: "int"
+services:
+  plantuml:
+    start_on_create: true

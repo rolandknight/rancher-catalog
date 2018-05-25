@@ -1,0 +1,5 @@
+name: helloworld
+description: |
+  Helloworld app.
+version: 1.0.0
+category: Example

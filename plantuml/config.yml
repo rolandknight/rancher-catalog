@@ -1,0 +1,5 @@
+name: plantuml
+description: |
+  PlantUML server.
+version: 1.0.0
+category: UML Tools
