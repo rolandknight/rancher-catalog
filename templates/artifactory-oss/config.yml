@@ -1,0 +1,6 @@
+name: Artifactory
+description: |
+  Artifactory is a universal Binary Repository Manager
+version: 6.0.1
+category: Repository
+

@@ -1,0 +1,44 @@
+version: '2'
+catalog:
+  name: "Artifactory"
+  version: "6.0.1"
+  description: "Artifactory is a universal Binary Repository Manager"
+  questions:
+    - variable: "FQDN"
+      label: "FQDN"
+      description: |
+      type: "string"
+      default: "arti.ericssoncicd.com"
+    - variable: "ARTIFACTORY_VERSION"
+      label: "Version"
+      description: |
+        Select the Artifactory server version. OSS or PRO
+      required: true
+      default: "OSS"
+      type: enum
+      options:
+        - OSS
+        - PRO
+    - variable: "EXTRA_JAVA_OPTIONS"
+      label: "Extra Java options"
+      description: |
+      type: "string"
+      default: ""
+    - variable: "VOLUME_DRIVER"
+      type: "string"
+      label: "Volume driver for Artifactory data"
+      description: |
+        Specify docker volume driver to use
+      default: "local"
+      required: true
+services:
+  artifactory:
+    scale: 1
+    retain_ip: true
+    health_check:
+      port: 8081
+      interval: 5000
+      unhealthy_threshold: 3
+      request_line: 'GET / HTTP/1.0'
+      healthy_threshold: 2
+      response_timeout: 5000
