@@ -1,0 +1,85 @@
+version: '2'
+
+catalog:
+  name: "autossh"
+  version: "1.0.0"
+  description: "Autossh tunnelling client"
+  minimum_rancher_version: v1.5.0
+  # maximum_rancher_version:
+  # upgrade_from: # The previous versions that this template can be upgraded from
+  questions:
+    - variable: "FQDN"
+      label: "FQDN"
+      description: |
+        Domain name to expose on Traefik (multiple comma separated domains can be exposed).
+      default: "docker.artifactory.proxy.mydomain.com,artifactory.proxy.mydomain.com"
+      type: "string"
+
+    - variable: "SSH_HOSTUSER"
+      label: "SSH User:"
+      description: "Specify the usename on the remote endpoint"
+      required: true
+      default: roland
+      type: "string"
+
+    - variable: "SSH_HOSTNAME"
+      label: "SSH Host:"
+      description: "Specify the address (ip preferred) of the remote endpoint"
+      required: true
+      default: home2.internal.ionpig.com
+      type: "string"
+
+    - variable: "SSH_HOST_PORT"
+      label: "SSH Host Port:"
+      description: "SSH host port"
+      required: true
+      default: 22
+      type: "int"
+
+    - variable: "SSH_MODE"
+      label: "SSH Mode:"
+      description: "Forward mode: Bind Local (-L) or Bind Remote (-R)"
+      required: true
+      default: -L
+      type: enum
+      options:
+        - -L
+        - -R
+
+    - variable: "SSH_BIND_ADDRESS"
+      label: "Local Bind Address:"
+      description: "Specify address to bind (*, localhost, etc)"
+      required: true
+      default: "*"
+      type: "string"
+
+    - variable: "SSH_TUNNEL_REMOTE"
+      label: "Local Bind Port:"
+      description: "Specify the port number which will serve as the tunnel entrance"
+      required: true
+      default: 9999
+      type: "int"
+
+    - variable: "SSH_TUNNEL_HOST"
+      label: "Remote Host:"
+      description: "Specify the address (ip preferred) of the target"
+      required: true
+      default: "home2.internal.ionpig.com"
+      type: "string"
+
+    - variable: "SSH_TUNNEL_LOCAL"
+      label: "Remote Port:"
+      description: "Specify the port number on the target which will serve as the tunnel exit"
+      required: true
+      default: 8081
+      type: "int"
+
+    - variable: "DOT_SSH_DIR"
+      label: ".ssh Directory:"
+      description: ".ssh directory"
+      required: true
+      default: /home/roland/.ssh
+      type: "string"
+services:
+  autossh:
+    start_on_create: true

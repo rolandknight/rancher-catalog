@@ -1,0 +1,5 @@
+name: autossh
+description: |
+  Autossh tunnelling client
+version: 1.0.0
+category: Networking
