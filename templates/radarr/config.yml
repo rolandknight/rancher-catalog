@@ -1,0 +1,6 @@
+name: Radarr
+description: Movie downloader
+version: v1.0
+category: Downloader
+license:
+projectURL: https://radarr.video/

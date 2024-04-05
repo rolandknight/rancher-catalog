@@ -1,0 +1,5 @@
+name: dgraph
+description: |
+  DGraph.
+version: 1.0.5
+category: Database

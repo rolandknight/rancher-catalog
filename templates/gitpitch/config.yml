@@ -1,0 +1,5 @@
+name: gitpitch
+description: |
+  Gitpitch presentation generator from markdown.
+version: 1.0.0
+category: Presentation Tools

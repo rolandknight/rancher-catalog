@@ -1,0 +1,5 @@
+name: Transmission
+description: Transmission torrent downloader
+version: v2.0
+category: Downloader
+projectURL: https://github.com/haugene/docker-transmission-openvpn

@@ -1,0 +1,36 @@
+version: '2'
+catalog:
+  name: "couchpotato"
+  version: "1.0"
+  description: "Couchpotato"
+  uuid: couchpotato-0
+  questions:
+    - variable: "APP_HOSTNAME"
+      label: "APP_HOSTNAME"
+      description: |
+        Domain name to expose on Traefik.
+      default: "couchpotato.internal.ionpig.com"
+      required: true
+      type: "string"
+    - variable: "volumedriver"
+      description: "Choose the Volume Driver being used.(Option: local or rancher-nfs)"
+      label: "Volume Driver:"
+      required: true
+      default: local
+      type: "enum"
+      options:
+        - local
+        - rancher-nfs
+services:
+  app:
+    scale: 1
+    lb_config:
+      port_rules:
+      - target_port: 5050
+        hostname: $APP_HOSTNAME
+    health_check:
+      port: 5050
+      interval: 2000
+      unhealthy_threshold: 3
+      healthy_threshold: 2
+      response_timeout: 2000

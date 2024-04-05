@@ -1,0 +1,60 @@
+version: '2'
+catalog:
+  name: sickrage
+  version: v122
+  description: Sickrage TV show downloader.
+  minimum_rancher_version: v0.59.0
+  questions:
+    - variable: "FQDN"
+      label: "FQDN"
+      description: |
+        Domain name to expose on Traefik.
+      default: "sickrage.internal.ionpig.com"
+      required: true
+      type: "string"
+    - variable: "WHITELIST"
+      label: "Access Whitelist"
+      description: |
+        Access whitelist.
+      default: "192.168.0.0/24"
+      required: true
+      type: "string"
+    - variable: "DOWNLOAD_DIR"
+      label: "Download directory"
+      description: |
+        Directory to scan for downloaded files.
+      default: "/data/transmission/completed"
+      required: true
+      type: "string"
+    - variable: "TV_DIR"
+      label: "TV directory"
+      description: |
+        Directory with TV video files.
+      default: "/data/media/tv"
+      required: true
+      type: "string"
+    - variable: "GID"
+      label: "GID"
+      description: |
+        Linux user group ID for download and tv volumes.
+      default: 1001
+      required: true
+      type: "int"
+    - variable: "UID"
+      label: "UID"
+      description: |
+        Linux user ID for download and tv volumes.
+      default: 1001
+      required: true
+      type: "int"
+    - variable: "TZ"
+      label: "Time Zone"
+      description: Time zone.
+      default: "America/Toronto"
+      required: true
+      type: "string"
+services:
+  sickrage:
+    start_on_create: true
+    retain_ip: true
+

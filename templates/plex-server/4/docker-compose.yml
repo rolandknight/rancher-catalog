@@ -1,0 +1,33 @@
+version: '2'
+
+volumes:
+  plex-conf-files:
+    driver: ${volumedriver}
+services:
+  plex:
+    image: plexinc/pms-docker:1.12.3.4973-215c28d86
+    volumes:
+    - plex-conf-files:/config
+    - ${TRANSCODE_DIR}:/transcode
+    - ${MEDIA_DIR}:/data
+    environment:
+      - TZ=${TZ}
+      - PLEX_CLAIM=${PLEX_CLAIM}
+      - CHANGE_CONFIG_DIR_OWNERSHIP=false
+      - PLEX_UID=${UID}
+      - PLEX_GID=${GID}
+      - ALLOWED_NETWORKS=${ALLOWED_NETWORKS}
+      - ADVERTISE_IP=${ADVERTISE_IP}
+    ports:
+        - 32400:32400
+    labels:
+      traefik.enable: true
+      traefik.port: 32400
+      traefik.frontend.rule: Host:${FQDN}
+      io.rancher.container.hostname_override: container_name
+#    healthcheck:
+#      test: ["CMD", "curl", "-f", "http://localhost"]
+#      interval: 1m30s
+#      timeout: 10s
+#      retries: 3
+#      start_period: 30s

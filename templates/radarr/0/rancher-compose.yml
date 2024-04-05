@@ -1,0 +1,52 @@
+version: '2'
+catalog:
+  name: radarr
+  version: v1.0
+  description: Radarr movie downloader.
+  minimum_rancher_version: v0.59.0
+  questions:
+    - variable: "FQDN"
+      label: "FQDN"
+      description: |
+        Domain name to expose on Traefik.
+      default: "radarr.internal.ionpig.com"
+      required: true
+      type: "string"
+    - variable: "DOWNLOAD_DIR"
+      label: "Download directory"
+      description: |
+        Directory to scan for downloaded files.
+      default: "/data/transmission/completed"
+      required: true
+      type: "string"
+    - variable: "MOVIE_DIR"
+      label: "Movie directory"
+      description: |
+        Directory with movie video files.
+      default: "/mnt/vol01/media/movies"
+      required: true
+      type: "string"
+    - variable: "GID"
+      label: "GID"
+      description: |
+        Linux user group ID for download and tv volumes.
+      default: 1001
+      required: true
+      type: "int"
+    - variable: "UID"
+      label: "UID"
+      description: |
+        Linux user ID for download and tv volumes.
+      default: 1001
+      required: true
+      type: "int"
+    - variable: "TZ"
+      label: "Time Zone"
+      description: Time zone.
+      default: "America/Toronto"
+      required: true
+      type: "string"
+services:
+  radarr:
+    start_on_create: true
+    retain_ip: true

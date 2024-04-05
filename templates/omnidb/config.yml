@@ -1,0 +1,5 @@
+name: omnidb
+description: |
+  Web database client UI.
+version: 1.6.3
+category: Database

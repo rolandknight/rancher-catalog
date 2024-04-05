@@ -12,7 +12,7 @@ catalog:
       label: "FQDN"
       description: |
         Domain name to expose on Traefik (multiple comma separated domains can be exposed).
-      default: "docker.artifactory.proxy.mydomain.com,artifactory.proxy.mydomain.com"
+      default: "docker.artifactory.proxy.ionpig.com,artifactory.proxy.ionpig.com"
       type: "string"
 
     - variable: "SSH_HOSTUSER"

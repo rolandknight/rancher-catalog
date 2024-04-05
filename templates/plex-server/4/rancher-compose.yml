@@ -1,0 +1,121 @@
+version: '2'
+catalog:
+  name: plex
+  version: v1.0
+  description: |
+    Plex media server.
+  minimum_rancher_version: v0.59.0
+  questions:
+    - variable: "FQDN"
+      label: "FQDN"
+      description: |
+        Domain name to expose on Traefik.
+      default: "plex.internal.ionpig.com"
+      required: true
+      type: "string"
+    - variable: "MEDIA_DIR"
+      label: "Media directory"
+      description: |
+        Directory for media files.
+      default: "/mnt/vol01/media"
+      required: true
+      type: "string"
+    - variable: "TRANSCODE_DIR"
+      label: "Directory for transcodes"
+      description: |
+        Temporary transcoded file directory.
+      default: "/tmp/transcode"
+      required: true
+      type: "string"
+    - variable: "GID"
+      label: "GID"
+      description: |
+        Linux user group ID for download and tv volumes.
+      default: 1001
+      required: true
+      type: "int"
+    - variable: "UID"
+      label: "UID"
+      description: |
+        Linux user ID for download and tv volumes.
+      default: 1001
+      required: true
+      type: "int"
+    - variable: "TZ"
+      label: "Time Zone"
+      description: Time zone.
+      default: "America/Toronto"
+      required: true
+      type: "string"
+# TODO move to secretes
+    - variable: "PLEX_CLAIM"
+      label: "Plex Claim Token"
+      description: Plex claim token
+      default: ""
+      required: true
+      type: "string"
+    - variable: "ADVERTISE_IP"
+      label: "Advertise IP:PORT"
+      description: Advertised IP address and port
+      default: "192.168.0.12:888"
+      required: true
+      type: "string"
+    - variable: "ALLOWED_NETWORKS"
+      label: "Allowed networks CIDR block"
+      description: Allowed networks without login (CIDR block).
+      default: "192.168.0.0/24"
+      required: true
+      type: "string"
+services:
+  plex:
+    start_on_create: true
+    retain_ip: true
+
+
+
+
+version: '2'
+.catalog:
+  name: Plex Server
+  version: v0.5
+  description: Plex Media Server
+  questions:
+    - variable: "PORT"
+      type: "string"
+      label: "PORT"
+      description: Frontend Port of Plex external:internal
+      default: 32400:32400
+    - variable: "PATHCONFIG"
+      type: "string"
+      label: "Config Path"
+      description: persistang Path to your Plex Config (/home/nick/plex, ...); use "config" as "Config Path" to use rancher-nfs
+      default: 'config'
+    - variable: "PATHMEDIA"
+      type: "string"
+      label: "Media Path"
+      description: the Path to your library (/media, or a nfs mount /mnt, ...)
+      default: '/media'
+    - variable: "PUID"
+      type: "string"
+      label: "PUID"
+      description: GroupID (not required)
+      default: 1100
+    - variable: "PGID"
+      type: "string"
+      label: "PGID"
+      description: PGID (not required)
+      default: 1100
+    - variable: NET
+      description: "select Network type"
+      label: "Network"
+      type: enum
+      options:
+        - host
+        - managed
+        - none
+      required: true
+      default: "host"
+services:
+  plex:
+    scale: 1
+    start_on_create: true

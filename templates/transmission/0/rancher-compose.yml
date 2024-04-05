@@ -1,0 +1,66 @@
+version: '2'
+catalog:
+  name: transmission
+  version: v2.0
+  description: |
+    Transmission torrent downloader. Requires secrets transmission_vpn_username and transmission_vpn_password.
+  minimum_rancher_version: v0.59.0
+  questions:
+    - variable: "FQDN"
+      label: "FQDN"
+      description: |
+        Domain name to expose on Traefik.
+      default: "transmission.internal.ionpig.com"
+      required: true
+      type: "string"
+    - variable: "DOWNLOAD_DIR"
+      label: "Download directory"
+      description: |
+        Directory for downloaded files.
+      default: "/data/transmission"
+      required: true
+      type: "string"
+    - variable: "GID"
+      label: "GID"
+      description: |
+        Linux user group ID for download and tv volumes.
+      default: 1001
+      required: true
+      type: "int"
+    - variable: "UID"
+      label: "UID"
+      description: |
+        Linux user ID for download and tv volumes.
+      default: 1001
+      required: true
+      type: "int"
+    - variable: "LOCAL_NETWORK"
+      label: "Local network CIDR block"
+      description: |
+        Local network CIDR block.
+      default: "192.168.0.0/24"
+      required: true
+      type: "string"
+    - variable: "OPENVPN_PROVIDER"
+      label: "OpenVPN provider"
+      description: OpenVPN provider.
+      default: "anonine"
+      required: true
+      type: "string"
+    - variable: "OPENVPN_CONFIG"
+      label: "OpenVPN config"
+      description: OpenVPN config.
+      default: "East.Canada"
+      required: false
+      type: "string"
+    - variable: "OPENVPN_OPTS"
+      label: "OpenVPN options"
+      description: OpenVPN options.
+      default: "--inactive 3600 --mute-replay-warnings"
+      required: false
+      type: "string"
+services:
+  transmission:
+    start_on_create: true
+    retain_ip: true
+

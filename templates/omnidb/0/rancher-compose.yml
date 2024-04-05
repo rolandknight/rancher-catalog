@@ -1,0 +1,19 @@
+version: '2'
+
+catalog:
+  name: "omnidb"
+  version: "1.6.3"
+  description: "Web database client UI."
+  minimum_rancher_version: v1.5.0
+  # maximum_rancher_version:
+  # upgrade_from: # The previous versions that this template can be upgraded from
+  questions:
+    - variable: "PORT"
+      label: "Port:"
+      description: "Web app port"
+      required: true
+      default: 9000
+      type: "int"
+services:
+  omnidb:
+    start_on_create: true

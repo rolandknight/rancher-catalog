@@ -1,0 +1,19 @@
+version: '2'
+
+catalog:
+  name: "DGraph"
+  version: "1.0.5"
+  description: DGraph.
+  minimum_rancher_version: v1.5.0
+  # maximum_rancher_version:
+  # upgrade_from: # The previous versions that this template can be upgraded from
+  questions:
+    - variable: "PORT"
+      label: "Port:"
+      description: "Server listen port"
+      required: true
+      default: 1521
+      type: "int"
+services:
+  dgraph:
+    start_on_create: true

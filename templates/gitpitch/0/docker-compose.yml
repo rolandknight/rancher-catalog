@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+  gitpitch:
+    image: gitlab.ionpig.com:5005/github.com/kns-it/docker-gitpitch
+    environment:
+      - GP_HOST=${FQDN}
+      - GP_GITLAB_BASE=https://gitlab.ionpig.com/
+      - GP_GITLAB_API=https://gitlab.ionpig.com/api/v4/
+      - GP_GITLAB_ACCESS_TOKEN=qXyxy9r_dLr2gmbzMv1t
+      - GP_GITLAB_AS_DEFAULT=true
+    labels:
+      io.rancher.container.hostname_override: container_name
+      traefik.enable: true
+      traefik.port: 9000
+      traefik.frontend.rule: "Host:${FQDN}"
